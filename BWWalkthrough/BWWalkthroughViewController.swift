@@ -15,6 +15,10 @@ This delegate performs basic operations such as dismissing the Walkthrough or ca
 Probably the Walkthrough is presented by this delegate.
 **/
 
+@objc enum BWWalkthroughScrollDirection: Int {
+    case Left, Right
+}
+
 @objc protocol BWWalkthroughViewControllerDelegate{
     
     @objc optional func walkthroughCloseButtonPressed()              // If the skipRequest(sender:) action is connected to a button, this function is called when that button is pressed.
@@ -36,6 +40,7 @@ At the moment it's only used to perform custom animations on didScroll.
     // This value can be used on the previous, current and next page to perform custom animations on page's subviews.
     
     @objc func walkthroughDidScroll(position:CGFloat, offset:CGFloat)   // Called when the main Scrollview...scrolls
+    @objc func walkthroughDidScroll(position:CGFloat, offset:CGFloat, direction: BWWalkthroughScrollDirection)
 }
 
 
@@ -59,6 +64,7 @@ At the moment it's only used to perform custom animations on didScroll.
         }
     }
     
+    private var startScrollPoint = CGPointZero
     
     // MARK: - Private properties -
     
@@ -250,11 +256,19 @@ At the moment it's only used to perform custom animations on didScroll.
                 // println("\(i):\(mx)")
                 
                 // We animate only the previous, current and next page
+                var direction = BWWalkthroughScrollDirection.Left
+                direction = scrollview.contentOffset.x < startScrollPoint.x ? .Left : .Right
+
                 if(mx < 2 && mx > -2.0){
+                    vc.walkthroughDidScroll(scrollview.contentOffset.x, offset: mx, direction: direction)
                     vc.walkthroughDidScroll(scrollview.contentOffset.x, offset: mx)
                 }
             }
         }
+    }
+    
+    func scrollViewWillBeginDragging(scrollView: UIScrollView) {
+        startScrollPoint = scrollView.contentOffset
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {

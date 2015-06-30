@@ -33,5 +33,9 @@ class CustomPageViewController: UIViewController,BWWalkthroughPage {
         }
         imageView?.layer.transform = CATransform3DTranslate(tr, 0 , (1.0 - tmpOffset) * 200, 0)
     }
+    
+    func walkthroughDidScroll(position: CGFloat, offset: CGFloat, direction: BWWalkthroughScrollDirection) {
+        println("Direction: \(direction.rawValue)")
+    }
 
 }
