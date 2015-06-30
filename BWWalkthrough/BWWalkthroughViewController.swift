@@ -69,7 +69,7 @@ At the moment it's only used to perform custom animations on didScroll.
     // MARK: - Private properties -
     
     private let scrollview:UIScrollView!
-    private var controllers:[UIViewController]!
+    var controllers:[UIViewController]!
     private var lastViewConstraint:NSArray?
     
     
