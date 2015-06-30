@@ -198,6 +198,17 @@ At the moment it's only used to perform custom animations on didScroll.
     private func updateUI(){
         
         // Get the current page
+        if pageControl?.currentPage >= currentPage || pageControl?.currentPage <= currentPage{
+            if let vc = controllers[pageControl!.currentPage] as? UIViewController {
+                vc.beginAppearanceTransition(false, animated: true)
+                vc.endAppearanceTransition()
+            }
+            
+            if let current = controllers[currentPage] as? UIViewController {
+                current.beginAppearanceTransition(true, animated: true)
+                current.endAppearanceTransition()
+            }
+        }
         
         pageControl?.currentPage = currentPage
         
