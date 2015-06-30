@@ -87,10 +87,6 @@ class BWWalkthroughPageViewController: UIViewController, BWWalkthroughPage {
         }
     }
 
-    func walkthroughDidScroll(position: CGFloat, offset: CGFloat, direction: BWWalkthroughScrollDirection) {
-
-    }
-    
     // MARK: Animations (WIP)
     
     private func animationAlpha(index:Int, var _ offset:CGFloat){

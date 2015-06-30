@@ -40,7 +40,7 @@ At the moment it's only used to perform custom animations on didScroll.
     // This value can be used on the previous, current and next page to perform custom animations on page's subviews.
     
     @objc func walkthroughDidScroll(position:CGFloat, offset:CGFloat)   // Called when the main Scrollview...scrolls
-    @objc func walkthroughDidScroll(position:CGFloat, offset:CGFloat, direction: BWWalkthroughScrollDirection)
+    @objc optional func walkthroughDidScroll(position:CGFloat, offset:CGFloat, direction: BWWalkthroughScrollDirection)
 }
 
 
@@ -260,7 +260,7 @@ At the moment it's only used to perform custom animations on didScroll.
                 direction = scrollview.contentOffset.x < startScrollPoint.x ? .Left : .Right
 
                 if(mx < 2 && mx > -2.0){
-                    vc.walkthroughDidScroll(scrollview.contentOffset.x, offset: mx, direction: direction)
+                    vc.walkthroughDidScroll?(scrollview.contentOffset.x, offset: mx, direction: direction)
                     vc.walkthroughDidScroll(scrollview.contentOffset.x, offset: mx)
                 }
             }
